@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Build-time only. The app is dynamic (auth() per request) and does not
+      # connect to FalkorDB or need real OAuth creds to compile.
+      AUTH_SECRET: dummy-ci-secret-not-used
+      ALLOWED_EMAIL_DOMAIN: example.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build

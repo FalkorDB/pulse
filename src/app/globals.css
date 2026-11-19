@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Design tokens. Values come from the validated data-viz palette (chrome/ink)
+   and FalkorDB's brand (hot-pink accent on deep purple-black in dark mode).
+   Expressed as "R G B" triplets so Tailwind's `rgb(var(--x) / <alpha>)` works.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --bg: 246 245 242; /* page plane */
+  --surface: 255 255 255; /* card surface */
+  --surface-2: 240 239 235; /* insets, hover wash */
+  --border: 225 224 217; /* hairline */
+  --fg: 11 11 11; /* primary ink */
+  --secondary: 82 81 78; /* secondary ink */
+  --muted: 137 135 129; /* axis / captions */
+  --accent: 216 27 147; /* FalkorDB pink, darkened for light-surface contrast */
+  --accent-fg: 255 255 255;
+  --good: 0 99 0;
+  --bad: 208 59 59;
+}
+
+.dark {
+  --bg: 11 7 20; /* deep purple-black page plane */
+  --surface: 21 16 31; /* card surface */
+  --surface-2: 30 24 48; /* insets, hover wash */
+  --border: 42 35 64; /* purple-tinted hairline */
+  --fg: 255 255 255;
+  --secondary: 195 194 183;
+  --muted: 137 135 129;
+  --accent: 255 87 183; /* FalkorDB hot pink */
+  --accent-fg: 14 4 33; /* deep purple ink on pink */
+  --good: 12 163 12;
+  --bad: 230 103 103;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular figures for any element that shows a metric number. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Thin, quiet scrollbars that match the theme. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--border)) transparent;
+}
+
+/* ── react-grid-layout chrome ─────────────────────────────────────────────
+   The library ships functional CSS (imported in DashboardGrid). These rules
+   restyle the placeholder + resize handle to match the theme. */
+.react-grid-item.react-grid-placeholder {
+  background: rgb(var(--accent) / 0.18) !important;
+  border: 1px dashed rgb(var(--accent) / 0.6);
+  border-radius: 14px;
+  opacity: 1;
+}
+.react-grid-item > .react-resizable-handle {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.react-grid-item:hover > .react-resizable-handle {
+  opacity: 0.5;
+}
+.react-grid-item > .react-resizable-handle::after {
+  border-right-color: rgb(var(--muted));
+  border-bottom-color: rgb(var(--muted));
+  width: 7px;
+  height: 7px;
+}
+.react-grid-item.react-draggable-dragging {
+  z-index: 30;
+  cursor: grabbing;
+}
+
+/* The pulse heartbeat stroke in the wordmark. */
+@media (prefers-reduced-motion: no-preference) {
+  .pulse-stroke {
+    stroke-dasharray: 40;
+    animation: pulse-dash 1.6s ease-in-out infinite alternate;
+  }
+}
+
+/* Recharts: remove the default focus outline on the surface. */
+.recharts-wrapper:focus,
+.recharts-surface:focus {
+  outline: none;
+}

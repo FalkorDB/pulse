@@ -1,0 +1,42 @@
+{
+  "name": "falkordb-pulse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FalkorDB Pulse — internal business-metrics dashboard, self-hosted on FalkorDB.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "collect": "tsx --tsconfig tsconfig.scripts.json scripts/collect.ts",
+    "backfill": "tsx --tsconfig tsconfig.scripts.json scripts/backfill.ts",
+    "seed": "tsx --tsconfig tsconfig.scripts.json scripts/seed.ts",
+    "backfill:history": "tsx --tsconfig tsconfig.scripts.json scripts/backfill-history.ts"
+  },
+  "dependencies": {
+    "falkordb": "^7.0.1",
+    "lucide-react": "^1.76.0",
+    "next": "^15.5.29",
+    "next-auth": "^5.0.0-beta.32",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-grid-layout": "^2.3.0",
+    "recharts": "^3.11.0",
+    "swr": "^2.5.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/react-grid-layout": "^1.3.6",
+    "autoprefixer": "^10.6.2",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.29",
+    "postcss": "^8.5.33",
+    "server-only": "^0.0.1",
+    "tailwindcss": "^3.4.19",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}
